@@ -1,7 +1,6 @@
 # C - Sorting algorithms & Big O
 ---------------------------------
 
-# Collaborators 
+# Collaborators
 - Lawrence Siro
 - Ami Soni
-
