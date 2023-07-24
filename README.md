@@ -1,7 +1,1 @@
-# C - Sorting algorithms & Big O
----------------------------------
-
-# Collaborators 
-- Lawrence Siro
-- Ami Soni
-
+0x1B. C - Sorting algorithms & Big O
