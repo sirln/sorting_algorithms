@@ -1,33 +1,33 @@
 #include "sort.h"
 
 /**
- * selection_sort - sorts an array of integers in ascending order
- * @array: array of integers to sort
- * @size: the length of the array
-**/
+  * selection_sort - sorts an array of integers in ascending order
+  *
+  * @array: array of integers to sort
+  * @size: length of array
+  *
+  */
 
 void selection_sort(int *array, size_t size)
 {
-	size_t p, q, min = 0;
-	int temp = 0;
+	int l, m, temp_index, temp;
 
-	if (array == NULL || size == 0)
+	if (!array || size <= 0)
 		return;
 
-	for (p = 0; p < size; p++)
+	for (l = 0; l < (int)size - 1; l++)
 	{
-		min = p;
-
-		for (q = p + 1; q < size; q++)
+		temp_index = l;
+		for (m = temp_index + 1; m < (int)size; m++)
 		{
-			if (array[q] < array[min])
-			min = q;
+			if (array[temp_index] > array[m])
+				temp_index = m;
 		}
-		if (min != p)
+		if (temp_index != l)
 		{
-			temp = array[p];
-			array[p] = array[min];
-			array[min] = temp;
+			temp = array[l];
+			array[l] = array[temp_index];
+			array[temp_index] = temp;
 			print_array(array, size);
 		}
 	}

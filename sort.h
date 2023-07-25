@@ -1,6 +1,7 @@
-#ifndef SORT_H
-#define SORT_H
-#include <stdlib.h>
+#ifndef SORT_HEADER_FILE
+#define SORT_HEADER_FILE
+
+#include <stddef.h>
 
 /**
  * struct listint_s - Doubly linked list node
@@ -16,16 +17,14 @@ typedef struct listint_s
 	struct listint_s *next;
 } listint_t;
 
-
-/*Functions for printing the arrays and lists*/
+/* printing functions */
 void print_array(const int *array, size_t size);
 void print_list(const listint_t *list);
 
-/*Functions for sorting algorithms*/
+/* sorting algorithms */
 void bubble_sort(int *array, size_t size);
+void insertion_sort_list(listint_t **list);
 void selection_sort(int *array, size_t size);
 void quick_sort(int *array, size_t size);
-int partition(int *array, int low, int high, size_t size);
-void quicksort_recursion(int *array, int low, int high, size_t size);
 
 #endif

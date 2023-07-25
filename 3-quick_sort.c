@@ -1,71 +1,84 @@
 #include "sort.h"
 
 /**
- * quick_sort - sorts the array in ascending order using Quicksort
- * @array: array of integers to be sorted
- * @size: length of the array
-**/
-
-void quick_sort(int *array, size_t size)
+  * swapper - swaps two integers
+  *
+  * @a: pointer to first integer
+  * @l: pointer to second integer
+  *
+  */
+void swapper(int *a, int *l)
 {
-	quicksort_recursion(array, 0, size - 1, size);
+	int temp;
+
+	temp = *a;
+	*a = *l;
+	*l = temp;
 }
 
-/**
- * quicksort_recursion - applies the divide and conquer rule
- * @array: array of integers
- * @low: lower index
- * @high: upper(higher) index
- * @size: array's length
-**/
-void quicksort_recursion(int *array, int low, int high, size_t size)
-{
-	int pivot_index;
-
-	if (low < high)
-	{	/*position of the pivot*/
-		pivot_index = partition(array, low, high, size);
-		/*left hand portion of the array*/
-		quicksort_recursion(array, low, pivot_index - 1, size);
-		/*Right hand portion of the array*/
-		quicksort_recursion(array, pivot_index + 1, high, size);
-	}
-}
 
 /**
- * partition - partitions the array between low - high indexes by a pivot value
- * @array: array of integers
- * @low: lower index
- * @high: upper (higher) index
- * @size: array's length
- * Return: index of the pivot
-**/
-
-int partition(int *array, int low, int high, size_t size)
+  * partition - partions the array
+  *
+  * @array: array of integers
+  * @swap: starting index of array partition to order
+  * @pivot_index: last index of array partition to order
+  * @size: size of the array
+  * Return: position of the pivot in the array (pivot_index)
+  *
+  */
+int partition(int *array, int swap, int pivot_index, size_t size)
 {
-	int pivot = array[high], temp = 0;
-	int i = low - 1, j = low;
+	int l;
 
-	for (j = low; j < high; j++)
+	for (l = swap; l < pivot_index; l++)
 	{
-		if (array[j] <= pivot)
+		if (array[l] < array[pivot_index])
 		{
-			i++;
-			if (array[i] != array[j])
-			{
-				temp = array[i];
-				array[i] = array[j];
-				array[j] = temp;
+			swapper(&array[swap], &array[l]);
+			if (array[swap] != array[l])
 				print_array(array, size);
-			}
+			swap++;
 		}
 	}
-	if (array[i + 1] != array[high])
-	{
-		temp = array[i + 1];
-		array[i + 1] = array[high];
-		array[high] = temp;
+	swapper(&array[swap], &array[l]);
+	if (array[swap] != array[l])
 		print_array(array, size);
+	return (swap);
+}
+
+/**
+  * quick_sort_recursion - applies the divide and conquer rule
+  *
+  * @array: array of integers
+  * @swap: starting index of array partition to order
+  * @pivot_index: last index of array partition to order
+  * @size: size of array
+  *
+  */
+void quick_sort_recursion(int *array, int swap, int pivot_index, size_t size)
+{
+	int new_pivot_index;
+
+	if (swap < pivot_index)
+	{
+		new_pivot_index = partition(array, swap, pivot_index, size);
+		quick_sort_recursion(array, swap, new_pivot_index - 1, size);
+		quick_sort_recursion(array, new_pivot_index + 1, pivot_index, size);
 	}
-	return (i + 1);
+}
+
+/**
+  * quick_sort - sorts the array in ascending order using Quicksort
+  *
+  * @array: array of integers to be sorted
+  * @size: length of the array
+  *
+  */
+void quick_sort(int *array, size_t size)
+{
+	if (!array || size < 2)
+		return;
+
+	 quick_sort_recursion(array, 0, size - 1, size);
 }
