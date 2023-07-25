@@ -1,7 +1,7 @@
 #include "sort.h"
 
 /**
-  * insertion_sort- sort a doubly linked list in ascending order
+  * insertion_sort_list - sort a doubly linked list in ascending order
   *
   * @list: pointer to pointer of head of a doubly linked list
   *
